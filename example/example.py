@@ -1,3 +1,5 @@
+import sys
+
 from pferret import wrapper
 
 compiler = wrapper.Ferret(cdp='')

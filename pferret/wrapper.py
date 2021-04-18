@@ -1,5 +1,6 @@
 import ctypes
 import json
+import os
 
 
 class StrReader:
@@ -16,7 +17,8 @@ class Ferret:
         self.proxy: str = kwargs.get('proxy', '')
         self.user_agent: str = kwargs.get('user_agent', '')
         self.params: dict = kwargs.get('params', {})
-        self.__ferret = ctypes.CDLL('../lib/libferret.so')
+        path = '/'.join(__file__.split('/')[:-1])
+        self.__ferret = ctypes.CDLL(f'{path}/lib/libferret.so')
         self.__ferret.Execute.restype = ctypes.c_char_p
 
     def execute(self, reader: StrReader, **kwargs) -> str:
