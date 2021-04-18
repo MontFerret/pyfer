@@ -50,10 +50,6 @@ build: deps
 	${GO} build -buildmode c-shared -o ${GO_LIB_PATH}libferret.so ${GO_LIB_PATH}
 
 clean:
-	#${GIT} checkout master
-	#${GIT} fetch
-	#${GIT} pull origin master
-	#${GIT} branch -D ${VERSION}
 	${RM} -rf
 	${RM} -rf ${BIN} dist pferret.egg-info dist build
 
@@ -67,8 +63,4 @@ deps: clean
 	${RM} ${BIN}${GO_INSTALLER}
 
 publish-package:
-	git checkout -b release-${VERSION}
-	git add .
-	git commit -m "[version]. ${cat $(VERSION)}"
-	git push origin release-${VERSION}
 	$(PYTHON) setup.py bdist_wheel upload -r ferret
