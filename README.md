@@ -5,5 +5,5 @@ c-library from golang source and write class wrapper.
 
 # Installation
 
-    pip install pferret
+    pip install pythonferret
     
