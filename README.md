@@ -13,8 +13,10 @@ You can run embedded fql-script:
 
     from pferret import wrapper
     
-    ferret = wrapper.Ferret()
-    reader = wrapper.StrReader('''LET doc = DOCUMENT("https://github.com/topics")
+    compiler = wrapper.Ferret(cdp='')
+    
+    script = '''
+    LET doc = DOCUMENT("https://github.com/topics")
     
     FOR el IN ELEMENTS(doc, ".py-4.border-bottom")
         LIMIT 10
@@ -26,7 +28,10 @@ You can run embedded fql-script:
             name: TRIM(name.innerText),
             description: TRIM(description.innerText),
             url: "https://github.com" + url.attributes.href
-        }''')
-    print(ferret.execute_json(reader))
-
-    
+        }
+    '''.encode('utf-8')
+    r = wrapper.StrReader(script)
+    res = compiler.execute_json(r)
+    print(res)
+    res = compiler.execute(r)
+    print(res)
