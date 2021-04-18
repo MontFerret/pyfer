@@ -24,11 +24,11 @@ setuptools.setup(
     packages=setuptools.find_packages(exclude=['tests']),
     include_package_data=True,
     data_files=[
-        ('header-file', ['lib/libferret.h']),
-        ('so-file', ['lib/libferret.so']),
-        ('go-file', ['lib/main.go']),
-        ('go-mod-file', ['lib/go.mod']),
-        ('go-sum-file', ['lib/go.sum']),
+        ('header-file', ['pferret/lib/libferret.h']),
+        ('so-file', ['pferret/lib/libferret.so']),
+        ('go-file', ['pferret/lib/main.go']),
+        ('go-mod-file', ['pferret/lib/go.mod']),
+        ('go-sum-file', ['pferret/lib/go.sum']),
     ],
     url=f'https://github.com/pyfer/{info.name}',
     classifiers=[
