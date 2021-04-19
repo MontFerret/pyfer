@@ -1,7 +1,7 @@
 # PyFer
 
-This repository intend of to help you to use [ferret](https://github.com/MontFerret/ferret) from python. We build 
-c-library from golang source and write class wrapper.  
+This project aims to help you use [Ferret](https://github.com/MontFerret/ferret) using Python. 
+It's a wrapper around Ferret's C library compiled with CGo.
 
 # Installation
 
