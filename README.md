@@ -1,6 +1,7 @@
 # PyFer
 
 This project aims to help you use [Ferret](https://github.com/MontFerret/ferret) using Python. 
+
 It's a wrapper around Ferret's C library compiled with CGo.
 
 # Installation
