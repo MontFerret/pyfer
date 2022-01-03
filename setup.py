@@ -30,7 +30,7 @@ setuptools.setup(
         ('go-mod-file', ['pferret/lib/go.mod']),
         ('go-sum-file', ['pferret/lib/go.sum']),
     ],
-    url=f'https://github.com/pyfer/{info.name}',
+    url=f'https://github.com/MontFerret/{info.name}',
     classifiers=[
         "Programming Language :: Python :: 3.7",
         "Operating System :: OS Independent",

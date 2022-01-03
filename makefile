@@ -1,5 +1,5 @@
 ifndef GO_LIB_PATH
-	GO_LIB_PATH=./lib/
+	GO_LIB_PATH=./pferret/lib/
 endif
 ifndef BIN
 	BIN=./bin/
@@ -44,10 +44,9 @@ ifndef VERSION
 	VERSION=$(shell cat version)
 endif
 
-build: deps
-	$(info ${GO} version)
-	PATH=`pwd`${GO_COMPILER_PATH}:${PATH}
-	${GO} build -buildmode c-shared -o ${GO_LIB_PATH}libferret.so ${GO_LIB_PATH}
+build:
+	$(go version)
+	go build -buildmode c-shared -o ${GO_LIB_PATH}libferret.so ${GO_LIB_PATH}
 
 clean:
 	${RM} -rf

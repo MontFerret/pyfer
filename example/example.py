@@ -2,7 +2,7 @@ import sys
 
 from pferret import wrapper
 
-compiler = wrapper.Ferret(cdp='')
+compiler = wrapper.Ferret(cdp='http://localhost:9222')
 
 with open('example.fql', 'r') as fd:
     fql = fd.read().encode('utf-8')

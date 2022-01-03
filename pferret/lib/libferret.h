@@ -19,6 +19,20 @@ typedef struct { const char *p; ptrdiff_t n; } _GoString_;
 /* Start of preamble from import "C" comments.  */
 
 
+#line 3 "main.go"
+
+struct COptions {
+	char* cdp;
+	char* proxy;
+	char* user_agent;
+};
+
+struct CResult {
+    char* data;
+    char* err;
+};
+
+#line 1 "cgo-generated-wrapper"
 
 
 /* End of preamble from import "C" comments.  */
@@ -68,7 +82,7 @@ typedef struct { void *data; GoInt len; GoInt cap; } GoSlice;
 extern "C" {
 #endif
 
-extern char* Execute(char* queryC, char* cdpC, char* proxyC, char* userAgentC);
+extern struct CResult Execute(char* queryC, struct COptions optsC);
 
 #ifdef __cplusplus
 }
