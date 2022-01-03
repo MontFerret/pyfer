@@ -1,7 +1,7 @@
 LET doc = DOCUMENT("https://github.com/topics", { driver: "cdp" })
 
 FOR el IN ELEMENTS(doc, ".py-4.border-bottom")
-    LIMIT 10
+    LIMIT @take
     LET url = ELEMENT(el, "a")?
     LET name = ELEMENT(el, ".f3")?
     LET description = ELEMENT(el, ".f5")?

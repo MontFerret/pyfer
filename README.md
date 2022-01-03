@@ -16,11 +16,11 @@ You can run embedded fql-script:
     
     compiler = wrapper.Ferret(cdp='')
     
-    script = '''
+    query = '''
     LET doc = DOCUMENT("https://github.com/topics")
     
     FOR el IN ELEMENTS(doc, ".py-4.border-bottom")
-        LIMIT 10
+        LIMIT @take
         LET url = ELEMENT(el, "a")
         LET name = ELEMENT(el, ".f3")
         LET description = ELEMENT(el, ".f5")
@@ -30,9 +30,14 @@ You can run embedded fql-script:
             description: TRIM(description.innerText),
             url: "https://github.com" + url.attributes.href
         }
-    '''.encode('utf-8')
-    r = wrapper.StrReader(script)
-    res = compiler.execute_json(r)
+    '''
+
+    params = {
+        "take": 10
+    }
+
+    res = compiler.execute_json(query, params=params)
     print(res)
-    res = compiler.execute(r)
+
+    res = compiler.execute(query, params=params)
     print(res)

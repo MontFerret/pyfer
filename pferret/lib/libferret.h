@@ -25,6 +25,7 @@ struct COptions {
 	char* cdp;
 	char* proxy;
 	char* user_agent;
+	char* params;
 };
 
 struct CResult {

@@ -5,6 +5,7 @@ struct COptions {
 	char* cdp;
 	char* proxy;
 	char* user_agent;
+	char* params;
 };
 
 struct CResult {
@@ -16,17 +17,19 @@ import "C"
 
 import (
 	"context"
+	"encoding/json"
 	"github.com/MontFerret/ferret"
 	"github.com/MontFerret/ferret/pkg/drivers"
 	"github.com/MontFerret/ferret/pkg/drivers/cdp"
 	"github.com/MontFerret/ferret/pkg/drivers/http"
+	"github.com/MontFerret/ferret/pkg/runtime"
 )
 
 type Options struct {
 	Cdp       string
-	Params    map[string]interface{}
 	Proxy     string
 	UserAgent string
+	Params    map[string]interface{}
 }
 
 //export Execute
@@ -50,6 +53,30 @@ func Execute(queryC *C.char, optsC C.struct_COptions) C.struct_CResult {
 
 	if len(userAgentS) != 0 {
 		opts.UserAgent = userAgentS
+	}
+
+	paramsS := C.GoString(optsC.params)
+
+	if len(paramsS) != 0 {
+		var params interface{}
+
+		err := json.Unmarshal([]byte(paramsS), &params)
+
+		if err != nil {
+			return C.struct_CResult{
+				err: C.CString(err.Error()),
+			}
+		}
+
+		dict, ok := params.(map[string]interface{})
+
+		if !ok {
+			return C.struct_CResult{
+				err: C.CString("Invalid params format"),
+			}
+		}
+
+		opts.Params = dict
 	}
 
 	f := ferret.New()
@@ -79,7 +106,7 @@ func Execute(queryC *C.char, optsC C.struct_COptions) C.struct_CResult {
 	out, err := f.Exec(
 		context.Background(),
 		query,
-		//runtime.WithParams(opts.Params),
+		runtime.WithParams(opts.Params),
 	)
 
 	if err != nil {

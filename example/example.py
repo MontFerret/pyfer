@@ -1,14 +1,14 @@
-import sys
-
 from pferret import wrapper
 
 compiler = wrapper.Ferret(cdp='http://localhost:9222')
 
 with open('example.fql', 'r') as fd:
-    fql = fd.read().encode('utf-8')
+    fql = fd.read()
 
-r = wrapper.StrReader(fql)
-res = compiler.execute_json(r)
+params = {
+    "take": 10
+}
+res = compiler.execute_json(fql, params=params)
 print(res)
-res = compiler.execute(r)
+res = compiler.execute(fql, params=params)
 print(res)
