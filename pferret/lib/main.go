@@ -1,6 +1,7 @@
 package main
 
 import "C"
+
 import (
 	"context"
 	"os"
@@ -46,7 +47,7 @@ func (opts Options) WithContext(ctx context.Context) (context.Context, context.C
 
 //export Execute
 func Execute(queryC *C.char, cdpC, proxyC, userAgentC *C.char) *C.char {
-    // TODO: add namesC *[]*C.char, valuesC *[]*C.char
+	// TODO: add namesC *[]*C.char, valuesC *[]*C.char
 	query := C.GoString(queryC)
 
 	opts := Options{}
